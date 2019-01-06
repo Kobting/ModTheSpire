@@ -19,7 +19,7 @@ public class ViewModel {
     private ArrayList<SteamSearch.WorkshopInfo> workshopInfos;
 
     public ViewModel(){
-        initModItems();
+        //initModItems();
     }
 
     private void initModItems() {

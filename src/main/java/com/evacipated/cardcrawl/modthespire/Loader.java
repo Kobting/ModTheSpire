@@ -4,7 +4,9 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.steam.SteamSearch;
 import com.evacipated.cardcrawl.modthespire.steam.SteamWorkshop;
 import com.evacipated.cardcrawl.modthespire.ui.ModSelectWindow;
+import com.evacipated.cardcrawl.modthespire.ui.fx.MainWindow;
 import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
+import com.evacipated.cardcrawl.modthespire.ui.fx.viewmodels.ViewModel;
 import com.vdurmont.semver4j.Semver;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -64,6 +66,10 @@ public class Loader
 
     public static void main(String[] args)
     {
+        new Thread(() -> {
+            MainWindow.main(args);
+        }).start();
+
         // Restart MTS if jre1.8.0_51 is detected
         // For those people with old laptops and OpenGL problems
         if (!Arrays.asList(args).contains("--jre51") && new File(JRE_51_DIR).exists()) {
