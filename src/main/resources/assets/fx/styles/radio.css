@@ -1,0 +1,10 @@
+.radio {
+    -fx-background-color: #A8A8A8;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+.radio .dot {
+    -fx-mark-color: #39B54A;
+    -fx-mark-highlight-color: #39B54A;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
