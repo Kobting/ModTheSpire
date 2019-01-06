@@ -4,6 +4,7 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.evacipated.cardcrawl.modthespire.patcher.*;
 import com.evacipated.cardcrawl.modthespire.patcher.InsertPatchInfo.LineNumberAndPatchType;
 import com.evacipated.cardcrawl.modthespire.patcher.javassist.MyCodeConverter;
+import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import javassist.*;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;

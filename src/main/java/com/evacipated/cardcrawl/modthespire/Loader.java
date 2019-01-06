@@ -4,6 +4,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.steam.SteamSearch;
 import com.evacipated.cardcrawl.modthespire.steam.SteamWorkshop;
 import com.evacipated.cardcrawl.modthespire.ui.ModSelectWindow;
+import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import com.vdurmont.semver4j.Semver;
 import javassist.ClassPool;
 import javassist.CtClass;

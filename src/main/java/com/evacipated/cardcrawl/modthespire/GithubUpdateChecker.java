@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.modthespire;
 
+import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import com.google.gson.*;
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;

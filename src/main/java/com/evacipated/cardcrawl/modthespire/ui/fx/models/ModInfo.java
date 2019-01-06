@@ -1,11 +1,10 @@
-package com.evacipated.cardcrawl.modthespire;
+package com.evacipated.cardcrawl.modthespire.ui.fx.models;
 
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;
 
-import javax.swing.*;
 import java.io.*;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;

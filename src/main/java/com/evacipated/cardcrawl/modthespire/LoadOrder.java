@@ -1,6 +1,5 @@
 package com.evacipated.cardcrawl.modthespire;
 
-import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import com.evacipated.cardcrawl.modthespire.lib.ConfigUtils;
 import com.evacipated.cardcrawl.modthespire.ui.JModPanelCheckBoxList;
 import com.evacipated.cardcrawl.modthespire.ui.ModPanel;
+import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;

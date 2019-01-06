@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.modthespire.patches;
 
 import com.evacipated.cardcrawl.modthespire.Loader;
-import com.evacipated.cardcrawl.modthespire.ModInfo;
+import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import com.evacipated.cardcrawl.modthespire.ReflectionHelper;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
