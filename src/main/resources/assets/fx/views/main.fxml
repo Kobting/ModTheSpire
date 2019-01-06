@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -34,7 +35,7 @@
                               <Font name="Arial" size="36.0" />
                            </font>
                            <effect>
-                              <InnerShadow color="#000000bf" />
+                              <InnerShadow color="#000000bf" height="8.0" radius="3.5" width="8.0" />
                            </effect>
                         </Button>
                      </children>
@@ -42,7 +43,7 @@
                         <Insets bottom="16.0" top="16.0" />
                      </GridPane.margin>
                      <effect>
-                        <DropShadow color="#2b2b2b" height="12.0" radius="5.5" spread="0.5" width="12.0" />
+                        <DropShadow blurType="GAUSSIAN" color="#2b2b2b" height="12.0" radius="5.5" spread="0.5" width="12.0" />
                      </effect>
                   </AnchorPane>
                   <GridPane>
@@ -56,32 +57,32 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="buttonWorkshop" layoutX="116.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #969696;" text="Workshop" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button fx:id="buttonWorkshop" layoutX="116.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #969696; -fx-background-radius: 2px;" text="Workshop" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <effect>
-                                    <InnerShadow />
+                                    <InnerShadow color="#00000027" />
                                  </effect>
                               </Button>
                            </children>
                            <GridPane.margin>
-                              <Insets bottom="8.0" left="48.0" right="48.0" top="8.0" />
+                              <Insets bottom="4.0" left="64.0" right="64.0" top="16.0" />
                            </GridPane.margin>
                            <effect>
-                              <DropShadow color="#2b2b2b8f" />
+                              <DropShadow blurType="GAUSSIAN" height="8.0" radius="3.5" spread="0.2" width="8.0" />
                            </effect>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <children>
-                              <Button fx:id="buttonUpdates" layoutX="116.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #969696;" text="Check For Updates" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Button fx:id="buttonUpdates" layoutX="116.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #969696; -fx-background-radius: 2px;" text="Check For Updates" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <effect>
-                                    <InnerShadow />
+                                    <InnerShadow blurType="GAUSSIAN" color="#00000026" />
                                  </effect>
                               </Button>
                            </children>
                            <GridPane.margin>
-                              <Insets bottom="8.0" left="48.0" right="48.0" top="8.0" />
+                              <Insets bottom="16.0" left="64.0" right="64.0" top="4.0" />
                            </GridPane.margin>
                            <effect>
-                              <DropShadow color="#2929298f" />
+                              <DropShadow blurType="GAUSSIAN" height="8.0" radius="3.5" spread="0.2" width="8.0" />
                            </effect>
                         </AnchorPane>
                      </children>
@@ -113,12 +114,16 @@
       </AnchorPane>
       <AnchorPane AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane fx:id="leftPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="modListPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="560.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ListView fixedCellSize="2.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ScrollPane layoutX="36.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #4D4D4D;;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <ListView fx:id="modListView" prefHeight="598.0" prefWidth="288.0" stylesheets="@../styles/listview.css" />
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="rightPane" layoutX="290.0" prefHeight="315.0" prefWidth="261.0" style="-fx-background-color: #4D4D4D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="modInfoPane" layoutX="290.0" prefHeight="315.0" prefWidth="261.0" style="-fx-background-color: #4D4D4D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
          <effect>
             <InnerShadow choke="0.69" color="#00000058" height="23.97" radius="5.4925" width="0.0" />

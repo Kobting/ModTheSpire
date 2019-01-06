@@ -1,0 +1,8 @@
+.list-view {
+    -fx-background-color:  #4D4D4D;
+}
+
+.list-cell {
+    -fx-padding: 1px;
+    -fx-background-color:  #4D4D4D;
+}
