@@ -116,7 +116,7 @@
          <children>
             <AnchorPane fx:id="modListPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="560.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ScrollPane layoutX="36.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #4D4D4D;;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ScrollPane layoutX="36.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #4D4D4D;;" stylesheets="@../styles/scrollbar.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
                         <ListView fx:id="modListView" prefHeight="598.0" prefWidth="288.0" stylesheets="@../styles/listview.css" />
                      </content>

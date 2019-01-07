@@ -5,6 +5,8 @@ import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModItemInfo;
 import com.evacipated.cardcrawl.modthespire.ui.fx.viewmodels.ViewModel;
 import com.evacipated.cardcrawl.modthespire.ui.fx.views.ModItem;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,10 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -55,7 +54,7 @@ public class MainWindow extends Application implements Initializable {
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("assets/fx/views/main.fxml"));
         Scene mainScene = new Scene(root);
-        primaryStage.setTitle("Mod The Spire");
+        primaryStage.setTitle("ModTheSpire");
         primaryStage.setScene(mainScene);
         primaryStage.show();
 
@@ -71,12 +70,18 @@ public class MainWindow extends Application implements Initializable {
         ObservableList<ModItem> modItems = FXCollections.observableArrayList();
         modItems.addAll(makeModItems());
         modListView.setItems(modItems);
+        modListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            newValue.setEffect(new Glow(.3));
+            if(oldValue != null) {
+                oldValue.setEffect(new Blend());
+            }
+        });
     }
 
     private ArrayList<ModItem> makeModItems() {
         ArrayList<ModItem> modItems = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) {
             ModItem modItem = new ModItem();
             modItem.setModVersion("1.0." + i);
             modItem.setModName("Test Mod " + i);
