@@ -6,7 +6,6 @@ import com.evacipated.cardcrawl.modthespire.steam.SteamWorkshop;
 import com.evacipated.cardcrawl.modthespire.ui.ModSelectWindow;
 import com.evacipated.cardcrawl.modthespire.ui.fx.MainWindow;
 import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
-import com.evacipated.cardcrawl.modthespire.ui.fx.viewmodels.ViewModel;
 import com.vdurmont.semver4j.Semver;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -40,6 +39,7 @@ public class Loader
     public static String JRE_51_DIR = "jre1.8.0_51";
     public static ModInfo[] MODINFOS;
     private static ClassPool POOL;
+    private static List<SteamSearch.WorkshopInfo> workshopInfos;
 
     public static SpireConfig MTS_CONFIG;
     public static String STS_VERSION = null;
@@ -66,9 +66,6 @@ public class Loader
 
     public static void main(String[] args)
     {
-        new Thread(() -> {
-            MainWindow.main(args);
-        }).start();
 
         // Restart MTS if jre1.8.0_51 is detected
         // For those people with old laptops and OpenGL problems
@@ -171,7 +168,7 @@ public class Loader
             }
         }
 
-        List<SteamSearch.WorkshopInfo> workshopInfos = new ArrayList<>();
+        workshopInfos = new ArrayList<>();
         try {
             System.out.println("Searching for Workshop items...");
             String path = SteamWorkshop.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -220,19 +217,19 @@ public class Loader
         findGameVersion();
 
         EventQueue.invokeLater(() -> {
-            ModInfo[] modInfos = getAllMods(workshopInfos);
-            ex = new ModSelectWindow(modInfos);
-            ex.setVisible(true);
-
-            ex.warnAboutMissingVersions();
-
+           // ModInfo[] modInfos = getAllMods();
+//            ex = new ModSelectWindow(modInfos);
+//            ex.setVisible(true);
+//
+//            ex.warnAboutMissingVersions();
+            MainWindow.main(args);
             String java_version = System.getProperty("java.version");
             if (!java_version.startsWith("1.8")) {
                 String msg = "ModTheSpire requires Java version 8 to run properly.\nYou are currently using Java " + java_version;
                 JOptionPane.showMessageDialog(null, msg, "Warning", JOptionPane.WARNING_MESSAGE);
             }
 
-            ex.startCheckingForMTSUpdate();
+            //ex.startCheckingForMTSUpdate();
         });
     }
 
@@ -420,7 +417,7 @@ public class Loader
         return files;
     }
 
-    private static ModInfo[] getAllMods(List<SteamSearch.WorkshopInfo> workshopInfos)
+    public static ModInfo[] getAllMods()
     {
         List<ModInfo> modInfos = new ArrayList<>();
 

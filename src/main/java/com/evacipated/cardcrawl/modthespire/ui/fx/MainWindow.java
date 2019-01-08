@@ -1,12 +1,10 @@
 package com.evacipated.cardcrawl.modthespire.ui.fx;
 
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModItemInfo;
 import com.evacipated.cardcrawl.modthespire.ui.fx.viewmodels.ViewModel;
 import com.evacipated.cardcrawl.modthespire.ui.fx.views.ModItem;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,25 +13,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.effect.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class MainWindow extends Application implements Initializable {
 
-    private ViewModel viewModel;
     private DropShadow launchButtonDropShadow = new DropShadow(10, Color.BLACK);
-
+    private ViewModel viewModel;
     //UI Elements
     @FXML private Button buttonLaunch;
     @FXML private Button buttonWorkshop;
@@ -81,12 +76,14 @@ public class MainWindow extends Application implements Initializable {
     private ArrayList<ModItem> makeModItems() {
         ArrayList<ModItem> modItems = new ArrayList<>();
 
-        for (int i = 0; i < 30; i++) {
-            ModItem modItem = new ModItem();
-            modItem.setModVersion("1.0." + i);
-            modItem.setModName("Test Mod " + i);
-            modItems.add(modItem);
-        }
+        System.out.println(Loader.getAllMods().length);
+
+        Arrays.stream(Loader.getAllMods()).forEach(modInfo -> {
+            ModItem item = new ModItem();
+            item.setModName(modInfo.Name);
+            item.setModVersion(modInfo.ModVersion.getOriginalValue());
+            modItems.add(item);
+        });
 
         return modItems;
     }
