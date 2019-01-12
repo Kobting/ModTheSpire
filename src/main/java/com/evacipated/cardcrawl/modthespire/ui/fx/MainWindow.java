@@ -1,12 +1,8 @@
 package com.evacipated.cardcrawl.modthespire.ui.fx;
 
-import com.evacipated.cardcrawl.modthespire.Loader;
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import com.evacipated.cardcrawl.modthespire.ui.fx.viewmodels.ViewModel;
 import com.evacipated.cardcrawl.modthespire.ui.fx.views.ModItem;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,8 +17,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class MainWindow extends Application implements Initializable {
@@ -61,31 +55,13 @@ public class MainWindow extends Application implements Initializable {
         initOnClicks();
         initStyles();
 
-        //TODO use the info we get from the viewModel to fill the mod items.
-        ObservableList<ModItem> modItems = FXCollections.observableArrayList();
-        modItems.addAll(makeModItems());
-        modListView.setItems(modItems);
+        modListView.setItems(viewModel.getModItems());
         modListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             newValue.setEffect(new Glow(.3));
             if(oldValue != null) {
                 oldValue.setEffect(new Blend());
             }
         });
-    }
-
-    private ArrayList<ModItem> makeModItems() {
-        ArrayList<ModItem> modItems = new ArrayList<>();
-
-        System.out.println(Loader.getAllMods().length);
-
-        Arrays.stream(Loader.getAllMods()).forEach(modInfo -> {
-            ModItem item = new ModItem();
-            item.setModName(modInfo.Name);
-            item.setModVersion(modInfo.ModVersion.getOriginalValue());
-            modItems.add(item);
-        });
-
-        return modItems;
     }
 
     private void initStyles(){

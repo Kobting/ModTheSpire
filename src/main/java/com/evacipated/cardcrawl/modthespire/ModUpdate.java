@@ -1,7 +1,5 @@
 package com.evacipated.cardcrawl.modthespire;
 
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
-
 import java.net.URL;
 
 public class ModUpdate

@@ -5,7 +5,6 @@ import com.evacipated.cardcrawl.modthespire.steam.SteamSearch;
 import com.evacipated.cardcrawl.modthespire.steam.SteamWorkshop;
 import com.evacipated.cardcrawl.modthespire.ui.ModSelectWindow;
 import com.evacipated.cardcrawl.modthespire.ui.fx.MainWindow;
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import com.vdurmont.semver4j.Semver;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -16,7 +15,6 @@ import org.objectweb.asm.commons.EmptyVisitor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -215,14 +213,17 @@ public class Loader
         System.out.println("Got " + workshopInfos.size() + " workshop items");
 
         findGameVersion();
+        launchUI();
+    }
 
+    private static void launchUI() {
         EventQueue.invokeLater(() -> {
-           // ModInfo[] modInfos = getAllMods();
+            ModInfo[] modInfos = getAllMods();
 //            ex = new ModSelectWindow(modInfos);
 //            ex.setVisible(true);
 //
 //            ex.warnAboutMissingVersions();
-            MainWindow.main(args);
+            MainWindow.main(ARGS);
             String java_version = System.getProperty("java.version");
             if (!java_version.startsWith("1.8")) {
                 String msg = "ModTheSpire requires Java version 8 to run properly.\nYou are currently using Java " + java_version;
@@ -231,11 +232,6 @@ public class Loader
 
             //ex.startCheckingForMTSUpdate();
         });
-    }
-
-    public static void closeWindow()
-    {
-        ex.dispatchEvent(new WindowEvent(ex, WindowEvent.WINDOW_CLOSING));
     }
 
     // runMods - sets up the ClassLoader, sets the isModded flag and launches the game

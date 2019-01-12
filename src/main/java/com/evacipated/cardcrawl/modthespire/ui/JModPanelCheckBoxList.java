@@ -1,6 +1,6 @@
 package com.evacipated.cardcrawl.modthespire.ui;
 
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;

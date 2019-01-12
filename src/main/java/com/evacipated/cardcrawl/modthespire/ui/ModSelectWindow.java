@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.modthespire.ui;
 
 import com.evacipated.cardcrawl.modthespire.*;
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

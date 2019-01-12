@@ -1,4 +1,4 @@
-package com.evacipated.cardcrawl.modthespire.ui.fx.models;
+package com.evacipated.cardcrawl.modthespire;
 
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;

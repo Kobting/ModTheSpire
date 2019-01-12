@@ -29,7 +29,7 @@ public class DisableGdxForceExit
         } finally {
             System.out.println("Game closed.");
             if (!Loader.DEBUG) {
-                Loader.closeWindow();
+                //Loader.closeWindow();
             }
         }
     }

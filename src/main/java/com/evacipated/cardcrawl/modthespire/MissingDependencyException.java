@@ -1,7 +1,5 @@
 package com.evacipated.cardcrawl.modthespire;
 
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
-
 public class MissingDependencyException extends Exception
 {
     public ModInfo modInfo;

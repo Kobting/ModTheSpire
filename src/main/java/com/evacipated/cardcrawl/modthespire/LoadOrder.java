@@ -15,7 +15,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import com.evacipated.cardcrawl.modthespire.lib.ConfigUtils;
 import com.evacipated.cardcrawl.modthespire.ui.JModPanelCheckBoxList;
 import com.evacipated.cardcrawl.modthespire.ui.ModPanel;
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -25,7 +24,7 @@ public class LoadOrder {
     
     private static String CFG_FILE = ConfigUtils.CONFIG_DIR + File.separator + "mod_order.xml";
     
-    private static class ModDescriptor {
+    public static class ModDescriptor {
         public File mod;
         public ModInfo info;
         public boolean checked;
@@ -43,7 +42,75 @@ public class LoadOrder {
         }
         return;
     }
-    
+
+    public static ArrayList<ModDescriptor> getModsInOrder(ModInfo[] info){
+        File cfg_file = new File(CFG_FILE);
+        File[] mods = new File[info.length];
+        for (int i=0; i<info.length; ++i) {
+            if (info[i].jarURL == null) {
+                System.out.println("ERROR: jarURL is null?: " + info[i].Name);
+                continue;
+            }
+            try {
+                mods[i] = new File(info[i].jarURL.toURI());
+            } catch (URISyntaxException e) {
+                System.out.println("Problem with: " + info[i].jarURL);
+                e.printStackTrace();
+            }
+        }
+        if (!cfg_file.exists()) {
+            return new ArrayList<>();
+        }
+
+        Document d;
+
+        try {
+            d = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new FileInputStream(cfg_file));
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            System.out.println("could not load config file: " + CFG_FILE);
+            System.out.println("exception was: " + e.toString());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        ArrayList<ModDescriptor> loadOrder = new ArrayList<>();
+        NodeList modsFromCfg = d.getElementsByTagName("mod");
+        ArrayList<Integer> foundMods = new ArrayList<>();
+        // O(n^2) will be unhappy with lots of mods
+        for (int i = 0; i < modsFromCfg.getLength(); i++) {
+            for (int j = 0; j < mods.length; j++) {
+                if (modsFromCfg.item(i).getTextContent().equals(mods[j].getName())) {
+                    loadOrder.add(new ModDescriptor(mods[j], info[j], true));
+                    foundMods.add(i);
+                }
+            }
+        }
+
+        // give error messages about mods that weren't found
+        for (int i = 0; i < modsFromCfg.getLength(); i++) {
+            if (!foundMods.contains(i)) {
+                System.out.println("could not find mod: " + modsFromCfg.item(i).getTextContent() + " even though it was specified in load order");
+            }
+        }
+
+        // add the rest of the mods that didn't have an order specified
+        for (int i = 0; i < mods.length; i++) {
+            boolean found = false;
+            for (int j = 0; j < loadOrder.size(); j++) {
+                ModDescriptor descriptor = loadOrder.get(j);
+                if (descriptor.mod == mods[i] && descriptor.info == info[i]) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                loadOrder.add(new ModDescriptor(mods[i], info[i], false));
+            }
+        }
+
+        return loadOrder;
+
+    }
+
     public static void loadModsInOrder(DefaultListModel<ModPanel> model, ModInfo[] info, JModPanelCheckBoxList parent) {
         File cfg_file = new File(CFG_FILE);
 
@@ -120,6 +187,8 @@ public class LoadOrder {
             }
             model.addElement(toAdd);
         }
+
+
     }
     
     private static void closeWriter(BufferedWriter writer) {

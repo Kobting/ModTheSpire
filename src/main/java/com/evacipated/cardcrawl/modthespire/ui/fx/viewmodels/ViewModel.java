@@ -1,43 +1,54 @@
 package com.evacipated.cardcrawl.modthespire.ui.fx.viewmodels;
 
+import com.evacipated.cardcrawl.modthespire.LoadOrder;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.steam.SteamSearch;
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
+import com.evacipated.cardcrawl.modthespire.ModInfo;
+import com.evacipated.cardcrawl.modthespire.ui.fx.views.ModItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ViewModel {
 
     private static String MOD_DIR = "mods/";
-    private ObservableList<ModInfo> modItems = FXCollections.observableArrayList();
+    private ModInfo[] modInfo;
+    private ObservableList<ModItem> modItems = FXCollections.observableArrayList();
     private ArrayList<SteamSearch.WorkshopInfo> workshopInfos;
+    private ArrayList<File> modJars = new ArrayList<>();
 
     public ViewModel(){
-        //initModItems();
+        initModItems();
     }
 
     private void initModItems() {
-        workshopInfos = initWorkshopInfos();
-        modItems.addAll(getAllMods(workshopInfos)); //TODO make this asynchronous?
+        modInfo = Loader.getAllMods();
+        ArrayList<LoadOrder.ModDescriptor> modDescriptors = LoadOrder.getModsInOrder(modInfo);
+        modDescriptors.forEach(modDescriptor -> {
+            ModItem item = new ModItem();
+            item.setModName(modDescriptor.info.Name);
+            item.setModVersion(modDescriptor.info.ModVersion.getValue());
+            item.setActive(modDescriptor.checked);
+            modItems.add(item);
+        });
     }
 
-    public ObservableList<ModInfo> getModItems(){
+    public ObservableList<ModItem> getModItems(){
         return this.modItems;
     }
 
     public void launchSTS(Boolean debug) {
-
-        if(debug) {
-            //TODO launch STS with mods patched and loaded with debug window
-        } else {
-            //TODO launch STS with mods patched and loaded without debug window
-        }
+        Loader.DEBUG = debug;
+        ArrayList<File> modFiles = new ArrayList<>();
+        LoadOrder.getModsInOrder(modInfo).forEach(modDescriptor -> {
+            if(modDescriptor.checked) {
+                modFiles.add(modDescriptor.mod);
+            }
+        });
+        Loader.runMods(modFiles.toArray(new File[0]));
     }
 
     public void searchForUpdates() {

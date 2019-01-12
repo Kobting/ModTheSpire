@@ -1,7 +1,5 @@
 package com.evacipated.cardcrawl.modthespire;
 
-import com.evacipated.cardcrawl.modthespire.ui.fx.models.ModInfo;
-
 public class DuplicateModIDException extends Exception
 {
     private ModInfo info1;
